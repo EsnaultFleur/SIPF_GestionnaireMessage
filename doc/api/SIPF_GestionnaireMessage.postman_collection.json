@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "e825342e-9a5b-4a1e-970a-07582cd0e13a",
+		"name": "SIPF_GestionnaireMessage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getUtilisateurConnecte",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4200/api/utilisateur-connecte/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"utilisateur-connecte",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getUtilisateurConnecte",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/utilisateur-connecte/",
+							"path": [
+								"utilisateur-connecte",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n\t\"id\": 1,\n\t\"nom\": \"Test\",\n\t\"prenom\": \"Utilisateur\", \n\t\"token\": \"12345abcde\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getMessages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/messages/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"messages",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getMessages",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/messages/",
+							"path": [
+								"messages",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n\t\"messages\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"dateDebut\": \"\",\n\t\t\t\"dateFin\": \"\",\n\t\t\t\"contenuHtml\": \"\",\n\t\t\t\"icone\": \"\",\n\t\t\t\"urlLien\": \"\"\n\t\t}\n\t]\n}"
+				}
+			]
+		},
+		{
+			"name": "getMessageById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/messages/{{idMessage}}/",
+					"path": [
+						"messages",
+						"{{idMessage}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getMessageById",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/messages/{{idMessage}}/",
+							"path": [
+								"messages",
+								"{{idMessage}}",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "addMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "/messages/{{idMessage}}/",
+					"path": [
+						"messages",
+						"{{idMessage}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "addMessage",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "/messages/{{idMessage}}/",
+							"path": [
+								"messages",
+								"{{idMessage}}",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "updateMessage",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "/messages/{{idMessage}}/",
+					"path": [
+						"messages",
+						"{{idMessage}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "updateMessage",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "/messages/{{idMessage}}/",
+							"path": [
+								"messages",
+								"{{idMessage}}",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "deleteMessage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "/messages/{{idMessage}}/",
+					"path": [
+						"messages",
+						"{{idMessage}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteMessage",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "/messages/{{idMessage}}/",
+							"path": [
+								"messages",
+								"{{idMessage}}",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "getHistoriqueActions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/messages/{{idMessage}}/historique-actions/",
+					"path": [
+						"messages",
+						"{{idMessage}}",
+						"historique-actions",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getHistoriqueActions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/messages/{{idMessage}}/historique-actions/",
+							"path": [
+								"messages",
+								"{{idMessage}}",
+								"historique-actions",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "getEtiquettes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/etiquettes/",
+					"path": [
+						"etiquettes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getEtiquettes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/etiquettes/",
+							"path": [
+								"etiquettes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "addEtiquette",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "/etiquettes/",
+					"path": [
+						"etiquettes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "addEtiquette",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "/etiquettes/",
+							"path": [
+								"etiquettes",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

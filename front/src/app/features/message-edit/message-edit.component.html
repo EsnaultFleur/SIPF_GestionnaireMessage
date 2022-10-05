@@ -1,0 +1,85 @@
+<mat-card>
+  <mat-card-title>
+    <h2>Nouveau message</h2>
+  </mat-card-title>
+  <mat-card-content>
+    <form #messageEditForm="ngForm">
+      <div class="flex flex-row">
+        <div class="flex-1">
+          <mat-form-field appearance="fill">
+            <mat-label>Date de début</mat-label>
+            <input matInput name="dateDebut" [formControl]="dateDebutControl" (dateChange)="changeDates()"
+              [min]="dateDebutMin" [max]="dateDebutMax" [matDatepicker]="pickerDebut" required />
+            <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDebut></mat-datepicker>
+            <mat-error *ngIf="dateDebutControl?.invalid">
+              {{getDateErrorMessage(dateDebutControl, dateDebutMin, dateDebutMax)}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ml-3">
+            <mat-label>Heure de début</mat-label>
+            <input matInput type="time" name="heureDebut" [(ngModel)]="heureDebut">
+          </mat-form-field>
+        </div>
+        <div class="flex-1">
+          <mat-form-field appearance="fill" class="ml-3">
+            <mat-label>Date de fin</mat-label>
+            <input matInput name="dateFin" [formControl]="dateFinControl" (dateChange)="changeDates()"
+              [min]="dateFinMin" [matDatepicker]="pickerFin" required />
+            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFin></mat-datepicker>
+            <mat-error *ngIf="dateFinControl?.invalid">
+              {{getDateErrorMessage(dateFinControl,dateFinMin)}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ml-3">
+            <mat-label>Heure de fin</mat-label>
+            <input matInput type="time" name="heureFin" [(ngModel)]="heureFin">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="mt-1">
+        <button mat-stroked-button (click)="openChoixIcone()">
+          Ajouter une icône
+        </button>
+      </div>
+      <div class="mt-4">
+        <h3>Contenu du message <span class="important"> *</span></h3>
+        <div class="summernote" [class.erreur]="isAfficheContenuErreur">
+          <summernote class="w-full" name="contenuHtml" [(ngModel)]="message.contenuHtml"
+            (ngModelChange)="refreshContenuErreur()" [ngxSummernote]="configSummernote">
+          </summernote>
+        </div>
+        <div class="mat-error">
+          <span *ngIf="isAfficheContenuErreur">Le contenu est obligatoire</span>
+        </div>
+      </div>
+      <mat-form-field appearance="fill" class="w-full mt-2 -mb-input">
+        <mat-label>Etiquettes</mat-label>
+        <mat-chip-list #chipList aria-label="Sélection d'étiquettes">
+          <mat-chip *ngFor="let etiquette of message.etiquettes" (removed)="deleteEtiquette(etiquette)">
+            {{ etiquette.libelle }}
+            <i matChipRemove class="ph-x-circle-fill"></i>
+          </mat-chip>
+          <input #etiquetteInput placeholder="Nouvelle étiquette..." [formControl]="etiquetteControl"
+            [matAutocomplete]="etiquetteAutocomplete" [matChipInputFor]="chipList"
+            (matChipInputTokenEnd)="addEtiquette($event)" />
+        </mat-chip-list>
+        <mat-autocomplete #etiquetteAutocomplete="matAutocomplete" (optionSelected)="selectEtiquette($event)">
+          <mat-option *ngFor="let etiquette of etiquettesFiltrees | async" [value]="etiquette">
+            {{ etiquette.libelle }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-stroked-button (click)="openVisualisationMessage()">
+      Visualiser le message
+    </button>
+    <div class="flex-1"></div>
+    <button mat-flat-button color="primary" (click)="saveMessage()">
+      Enregistrer le message
+    </button>
+  </mat-card-footer>
+</mat-card>

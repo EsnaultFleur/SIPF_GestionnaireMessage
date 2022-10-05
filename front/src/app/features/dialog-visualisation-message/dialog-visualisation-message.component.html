@@ -1,0 +1,18 @@
+<div mat-dialog-title>
+  <h2>Aperçu du message</h2>
+  <a mat-dialog-close class="btn-edit close-dialog" title="Fermer l'aperçu" matTooltip="Fermer l'aperçu"
+    matTooltipClass="my-tooltip">
+    <i class="ph-x-light"></i>
+  </a>
+</div>
+<mat-dialog-content>
+  <div class="message">
+    <i class="ph-info-light"></i>
+    <div [innerHtml]="message.contenuHtml"></div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button mat-dialog-close>
+    Fermer l'aperçu
+  </button>
+</mat-dialog-actions>

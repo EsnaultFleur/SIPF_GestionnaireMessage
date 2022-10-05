@@ -1,0 +1,18 @@
+@import "../../../assets/css/variables";
+
+.message {
+  display: flex;
+  flex-direction: row;
+  padding: 0.75rem 1rem;
+  background: $color-blue-light;
+
+  & > i {
+    color: $color-blue;
+    font-size: 2rem;
+    margin-right: 1rem;
+
+    & + * {
+      margin-top: 0.35rem;
+    }
+  }
+}

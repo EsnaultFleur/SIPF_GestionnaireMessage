@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <span class="title">SIPF - Gestionnaire de message</span>
+    <a
+      matRipple
+      class="ml-3"
+      [routerLink]="pathMessageConfigures"
+      routerLinkActive="menuActif"
+    >
+      <i class="ph-chats-light"></i>
+      Liste de messages
+    </a>
+    <div class="flex-1"></div>
+    <button
+      matRipple
+      [matMenuTriggerFor]="menu"
+      class="flex flex-row items-center"
+    >
+      <i class="ph-user-circle-fill"></i>
+      <span>{{ utilisateur.prenom }} {{ utilisateur.nom }}</span>
+      <i class="ph-caret-down-light"></i>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button matRipple mat-menu-item routerLink="/">
+        <i class="ph-identification-card-light"></i>
+        <span>Mon compte</span>
+      </button>
+      <button matRipple mat-menu-item routerLink="/">
+        <i class="ph-sign-out-light"></i>
+        <span>Déconnexion</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="content">
+  <div class="column-middle">
+    <router-outlet></router-outlet>
+  </div>
+</div>

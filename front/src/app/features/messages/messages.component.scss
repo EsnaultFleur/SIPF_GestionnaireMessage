@@ -1,0 +1,28 @@
+@import "../../../assets/css/variables";
+
+mat-expansion-panel {
+  background: $color-grey-light;
+  box-shadow: none !important;
+}
+
+.case-actions {
+  width: 10rem;
+}
+
+.case-contenu {
+  display: block;
+  height: 4.5rem;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.etiquette {
+  display: initial;
+  padding: 0.25rem 0.5rem;
+  background: $color-indigo-light;
+  border-radius: 1rem;
+
+  & + .etiquette {
+    margin-left: 0.5rem;
+  }
+}

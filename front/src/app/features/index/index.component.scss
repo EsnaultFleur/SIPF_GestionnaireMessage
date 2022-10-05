@@ -1,0 +1,44 @@
+@import "../../../assets/css/variables";
+
+// MENU
+mat-toolbar-row {
+  padding-right: 0;
+  font-size: 1.215rem;
+  color: $color-white;
+  background: $color-indigo;
+  z-index: 1030;
+
+  span.title {
+    font-size: 1.215rem;
+    padding: 0 1rem;
+  }
+
+  & > span,
+  & > a,
+  & > button {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  a.menuActif {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  & > a,
+  & > button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+  }
+
+  button span + i {
+    margin-left: 0.5rem;
+  }
+}

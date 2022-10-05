@@ -1,0 +1,7 @@
+<div class="flex flex-row items-center">
+  <i [class.ph-check-circle-fill]="donneesSnackbar.type === typeSnackbar.Success"
+    [class.ph-warning-fill]="donneesSnackbar.type === typeSnackbar.Warning"
+    [class.ph-warning-circle-fill]="donneesSnackbar.type === typeSnackbar.Error">
+  </i>
+  {{donneesSnackbar.message}}
+</div>

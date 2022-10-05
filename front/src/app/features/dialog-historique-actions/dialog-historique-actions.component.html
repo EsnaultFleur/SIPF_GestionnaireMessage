@@ -1,0 +1,65 @@
+<div mat-dialog-title>
+  <h2>Historique des actions</h2>
+  <button mat-dialog-close class="btn-edit close-dialog" title="Fermer l'historique" matTooltip="Fermer l'historique"
+    matTooltipClass="my-tooltip">
+    <i class="ph-x-light"></i>
+  </button>
+</div>
+<mat-dialog-content *ngIf="isLoading">
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '100%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '80%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '100%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '70%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '80%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+  <ngx-skeleton-loader count="1" appearance="line"
+    [theme]="{ width: '50%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+  </ngx-skeleton-loader>
+</mat-dialog-content>
+<mat-dialog-content *ngIf="!isLoading">
+  <app-aucun-element *ngIf="!historiqueActions?.length" nameIcone="ph-clock-counter-clockwise"
+    message="Aucune action enregistrée"></app-aucun-element>
+  <div *ngIf="historiqueActions?.length">
+    <table mat-table *ngIf="historiqueActions?.length" class="w-full" [dataSource]="datasource">
+      <ng-container matColumnDef="typeAction">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let historiqueAction">
+          {{historiqueAction?.typeAction | typeAction}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let historiqueAction">
+          {{historiqueAction?.date | date:'dd/MM/yyyy à HH:mm'}}
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="utilisateur">
+        <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
+        <td mat-cell *matCellDef="let historiqueAction">
+          {{historiqueAction?.utilisateur?.prenom | titlecase}} {{historiqueAction?.utilisateur?.nom | uppercase}}
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button mat-dialog-close>
+    Fermer l'historique
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,148 @@
+<mat-card class="mt-3">
+  <mat-card-title class="justify-between">
+    <h2>Liste de messages configurés</h2>
+    <button mat-flat-button color="primary" (click)="editMessage()">
+      Créer un nouveau message
+    </button>
+  </mat-card-title>
+  <mat-card-content *ngIf="!isLoading">
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '100%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '80%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '100%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '70%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '80%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line"
+      [theme]="{ width: '50%', height: '1.5rem', 'border-radius': '0', 'margin-bottom': '.25rem' }">
+    </ngx-skeleton-loader>
+  </mat-card-content>
+  <mat-card-content *ngIf="isLoading">
+    <app-aucun-element *ngIf="!messages?.length" nameIcone="ph-chat-centered-dots-light"
+      message="Aucun message configuré"></app-aucun-element>
+    <div *ngIf="messages?.length">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>Filtres</h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="flex flex-row items-center">
+            <mat-form-field appearance="fill" class="mat-form-field-white -mb-input">
+              <mat-label>Date de début</mat-label>
+              <input matInput [matDatepicker]="pickerDebut" />
+              <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+              <mat-datepicker #pickerDebut></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="mat-form-field-white ml-3 -mb-input">
+              <mat-label>Date de fin</mat-label>
+              <input matInput [matDatepicker]="pickerFin" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFin></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="mat-form-field-white ml-3 flex-1 -mb-input">
+              <mat-label>Etiquettes</mat-label>
+              <mat-select [formControl]="etiquettesControl" multiple>
+                <mat-select-trigger>
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let etiquette of etiquettesControl.value" [removable]="true"
+                      (removed)="deleteEtiquette(etiquette)">
+                      {{ etiquette.libelle }}
+                      <i matChipRemove class="ph-x-circle-fill"></i>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-select-trigger>
+                <mat-option *ngFor="let etiquette of etiquettes" [value]="etiquette">
+                  {{ etiquette.libelle }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="flex flex-col items-end mt-3">
+            <button mat-flat-button color="primary">
+              Appliquer les filtres
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div class="mt-3">
+        <table mat-table *ngIf="messages?.length" class="w-full" [dataSource]="datasource">
+          <ng-container matColumnDef="dateDebut">
+            <th mat-header-cell *matHeaderCellDef>Date début</th>
+            <td mat-cell *matCellDef="let message">
+              {{message?.dateDebut | date:'dd/MM/yyyy'}}
+              <span *ngIf="isHoursOnDate(message?.dateDebut)">
+                à {{message?.dateDebut | date:'HH:mm'}}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateFin">
+            <th mat-header-cell *matHeaderCellDef>Date fin</th>
+            <td mat-cell *matCellDef="let message">
+              {{message?.dateFin | date:'dd/MM/yyyy'}}
+              <span *ngIf="isHoursOnDate(message?.dateFin)">
+                à {{message?.dateFin | date:'HH:mm'}}
+              </span>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <ng-container matColumnDef="contenu">
+            <th mat-header-cell *matHeaderCellDef>Contenu</th>
+            <td mat-cell *matCellDef="let message">
+              <span class="case-contenu" [innerHTML]="message?.contenuHtml"></span>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <ng-container matColumnDef="etiquettes">
+            <th mat-header-cell *matHeaderCellDef>Etiquettes</th>
+            <td mat-cell *matCellDef="let message">
+              <div class="etiquette" *ngFor="let etiquette of message?.etiquettes">{{etiquette?.libelle}}</div>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let message" class="case-actions">
+              <div class="flex flex-row">
+                <a class="btn-edit" (click)="openVisualisationMessage(message)" matTooltip="Visualiser"
+                  matTooltipClass="my-tooltip">
+                  <i class="ph-eye-light"></i>
+                </a>
+                <a class="btn-edit" (click)="editMessage(message?.id)" matTooltip="Modifier"
+                  matTooltipClass="my-tooltip">
+                  <i class="ph-pencil-light"></i>
+                </a>
+                <a class="btn-edit" (click)="deleteMessage(message)" matTooltip="Supprimer"
+                  matTooltipClass="my-tooltip">
+                  <i class="ph-trash-light"></i>
+                </a>
+                <a class="btn-edit" (click)="openHistoriqueActions(message?.id)"
+                  matTooltip="Voir l'historique des actions" matTooltipClass="my-tooltip">
+                  <i class="ph-clock-counter-clockwise-light"></i>
+                </a>
+              </div>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

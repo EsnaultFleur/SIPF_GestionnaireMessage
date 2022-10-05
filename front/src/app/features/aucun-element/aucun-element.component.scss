@@ -1,0 +1,21 @@
+@import "../../../assets/css/variables";
+
+.aucun-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  i {
+    margin-bottom: 1rem;
+    font-size: 7rem;
+    color: $color-indigo-light;
+  }
+
+  p {
+    max-width: 25rem;
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+}
