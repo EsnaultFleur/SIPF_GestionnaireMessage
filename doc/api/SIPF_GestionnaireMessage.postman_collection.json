@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e825342e-9a5b-4a1e-970a-07582cd0e13a",
+		"_postman_id": "0f09ca23-6957-448b-8bf8-1c43c011b8b4",
 		"name": "SIPF_GestionnaireMessage",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7343302"
 	},
 	"item": [
 		{
@@ -11,12 +12,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4200/api/utilisateur-connecte/",
-					"protocol": "http",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/utilisateur-connecte/",
 					"host": [
-						"localhost"
+						"{{protocol}}{{hostname}}{{port}}"
 					],
-					"port": "4200",
 					"path": [
 						"api",
 						"utilisateur-connecte",
@@ -31,8 +30,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/utilisateur-connecte/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/utilisateur-connecte/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"utilisateur-connecte",
 								""
 							]
@@ -41,9 +44,9 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"header": null,
+					"header": [],
 					"cookie": [],
-					"body": "{\n\t\"id\": 1,\n\t\"nom\": \"Test\",\n\t\"prenom\": \"Utilisateur\", \n\t\"token\": \"12345abcde\"\n}"
+					"body": "{\n    \"id\": 1,\n    \"nom\": \"Test\",\n    \"prenom\": \"Utilisateur\"\n}"
 				}
 			]
 		},
@@ -53,12 +56,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/messages/",
-					"protocol": "http",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/",
 					"host": [
-						"localhost"
+						"{{protocol}}{{hostname}}{{port}}"
 					],
-					"port": "9000",
 					"path": [
 						"api",
 						"messages",
@@ -73,8 +74,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/messages/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
 								""
 							]
@@ -83,9 +88,9 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"header": null,
+					"header": [],
 					"cookie": [],
-					"body": "{\n\t\"messages\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"dateDebut\": \"\",\n\t\t\t\"dateFin\": \"\",\n\t\t\t\"contenuHtml\": \"\",\n\t\t\t\"icone\": \"\",\n\t\t\t\"urlLien\": \"\"\n\t\t}\n\t]\n}"
+					"body": "[\n    {\n        \"id\": 1,\n        \"dateDebut\": \"2022-10-09T14:00:00.000+0200\",\n        \"dateFin\": \"2022-10-15T22:30:00.000+0200\",\n        \"contenuHtml\": \"<p>Mon <b>SUPER</b> message.</p>\",\n        \"icone\": \"ph-info-circle-light\",\n        \"etiquettes\": [\n            {\n                \"id\": 1,\n                \"libelle\": \"Promotion\"\n            }\n        ]\n    }\n]"
 				}
 			]
 		},
@@ -95,8 +100,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "/messages/{{idMessage}}/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"messages",
 						"{{idMessage}}",
 						""
@@ -108,10 +117,30 @@
 					"name": "getMessageById",
 					"originalRequest": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"dateDebut\": \"2022-10-09T14:00:00.000+0200\",\r\n    \"dateFin\": \"2022-10-15T22:30:00.000+0200\",\r\n    \"contenuHtml\": \"<p>Mon <b>SUPER</b> message.</p>\",\r\n    \"icone\": \"ph-info-circle-light\",\r\n    \"etiquettes\": [\r\n        {\r\n            \"id\": 1,\r\n            \"libelle\": \"Promotion\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "/messages/{{idMessage}}/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
 								"{{idMessage}}",
 								""
@@ -120,10 +149,10 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -132,11 +161,23 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": null,\r\n    \"dateDebut\": \"2022-10-09T14:00:00.000+0200\",\r\n    \"dateFin\": \"2022-10-15T22:30:00.000+0200\",\r\n    \"contenuHtml\": \"<p>Mon <b>SUPER</b> message.</p>\",\r\n    \"icone\": \"ph-info-circle-light\",\r\n    \"etiquettes\": [\r\n        {\r\n            \"id\": 1,\r\n            \"libelle\": \"Promotion\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "/messages/{{idMessage}}/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"messages",
-						"{{idMessage}}",
 						""
 					]
 				}
@@ -148,20 +189,23 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "/messages/{{idMessage}}/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
-								"{{idMessage}}",
 								""
 							]
 						}
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -171,8 +215,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "/messages/{{idMessage}}/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"messages",
 						"{{idMessage}}",
 						""
@@ -184,10 +232,30 @@
 					"name": "updateMessage",
 					"originalRequest": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"dateDebut\": \"2022-10-09T14:00:00.000+0200\",\r\n    \"dateFin\": \"2022-10-15T22:30:00.000+0200\",\r\n    \"contenuHtml\": \"<p>Mon <b>SUPER</b> message.</p>\",\r\n    \"icone\": \"ph-info-circle-light\",\r\n    \"etiquettes\": [\r\n        {\r\n            \"id\": 1,\r\n            \"libelle\": \"Promotion\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "/messages/{{idMessage}}/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
 								"{{idMessage}}",
 								""
@@ -196,10 +264,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -209,8 +277,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "/messages/{{idMessage}}/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"messages",
 						"{{idMessage}}",
 						""
@@ -224,8 +296,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "/messages/{{idMessage}}/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
 								"{{idMessage}}",
 								""
@@ -234,10 +310,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -247,8 +323,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "/messages/{{idMessage}}/historique-actions/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/historique-actions/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"messages",
 						"{{idMessage}}",
 						"historique-actions",
@@ -263,8 +343,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/messages/{{idMessage}}/historique-actions/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/messages/{{idMessage}}/historique-actions/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"messages",
 								"{{idMessage}}",
 								"historique-actions",
@@ -274,10 +358,10 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -287,8 +371,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "/etiquettes/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/etiquettes/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"etiquettes",
 						""
 					]
@@ -301,8 +389,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/etiquettes/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/etiquettes/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"etiquettes",
 								""
 							]
@@ -310,10 +402,10 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": "[\n    {\n        \"id\": 1,\n        \"libelle\": \"Promotion\"\n    },\n    {\n        \"id\": 2,\n        \"libelle\": \"Nouveaute\"\n    },\n    {\n        \"id\": 3,\n        \"libelle\": \"Evènement\"\n    }\n]"
 				}
 			]
 		},
@@ -322,9 +414,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"libelle\": \"Promotion\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "/etiquettes/",
+					"raw": "{{protocol}}{{hostname}}{{port}}/api/etiquettes/",
+					"host": [
+						"{{protocol}}{{hostname}}{{port}}"
+					],
 					"path": [
+						"api",
 						"etiquettes",
 						""
 					]
@@ -336,9 +441,17 @@
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "/etiquettes/",
+							"raw": "{{protocol}}{{hostname}}{{port}}/api/etiquettes/",
+							"host": [
+								"{{protocol}}{{hostname}}{{port}}"
+							],
 							"path": [
+								"api",
 								"etiquettes",
 								""
 							]
@@ -346,10 +459,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		}
